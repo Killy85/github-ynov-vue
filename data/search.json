@@ -1,9 +1,6 @@
 {
-    "projects" : ["github-ynov-vue"],
-    "projects_backup" : ["github-ynov-vue", "flowppy","read-me.io_back"],
-    "users_bckup" : ["Killy85","Nair0fl","raphaelCharre","mathiasLoiret","thomaspich","TeofiloJ","Grigusky","Dakistos",
+    "projects" : ["github-ynov-vue", "flowppy","read-me.io_back"],
+    "users" : ["Killy85","Nair0fl","raphaelCharre","mathiasLoiret","thomaspich","TeofiloJ","Grigusky","Dakistos",
         "mael61","KevinPautonnier","BenoitCochet","sfongue","ClementCaillaud","gfourny", "Mokui", "LordInateur",
-        "AntoineGOSSET","etienneYnov", "Coblestone","AlexDesvallees","rudy8530","benjaminbra",  "alixnzt"],
-
-    "users" : ["Killy85","mathiasLoiret"]
+        "AntoineGOSSET","etienneYnov", "Coblestone","AlexDesvallees","rudy8530","benjaminbra",  "alixnzt"]
 }
