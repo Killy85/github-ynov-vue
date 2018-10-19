@@ -6,27 +6,27 @@
         <title>Test Vue </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-        
     </head>
     <body>
-    <div id="car">
-            <h1 > {{ brand }} {{ model }}  {{ year }} </h1>
+        <!-- This block is the menu we will use to add projects and user we want to watch-->
+        <div id="menu">
 
-            <form class="car">
-                <label> Une autre marque</label>
-                <input v-model="brand"><br>
-                <label>Un autre modèle</label>
-                <input v-model="model"><br>
-                <label>Une autre année</label>
-                <input v-model="year">
-            </form>
-
-            <p>
-                Et on repète : {{ brand }} {{ model }} {{ year }}
-            </p>
-
-    </div>
+        </div>
+        <!-- This block is the feed in which we will diplay info about watched repo-->
+        <div id="feed">
+                <ul id="example-1">
+                    <li v-for="item in repo">
+                          {{ item.name}} <br>
+                          <ul id="example-1">
+                            <li v-for="commit in item.commits">
+                                  {{ commit.commit.author.name }} {{ commit.commit.message }} {{ commit.sha }}
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+        </div>
         <script src="./index.js"></script>
     </body>
-    </html>
+    </html> 
