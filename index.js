@@ -5,6 +5,26 @@
       return JSON.parse(json);
     }   
     
+
+    function Editor(input, preview) {
+      this.update = function () {
+        preview.innerHTML = markdown.toHTML(input.value);
+      };
+      input.editor = this;
+      this.update();
+    }
+
+    function loadMD(url){
+      get_readme_data(url, (status, val) => {
+        var $ = function (id) { return document.getElementById(id); };
+        test = {"value" : val}
+        new Editor(test, $("preview"));
+      })
+    }
+
+    
+
+
     // Load text with Ajax synchronously: takes path to file and optional MIME type
     function loadTextFileAjaxSync(filePath, mimeType)
     {
@@ -69,6 +89,7 @@
       
 
   }
+
   var get_repos = function(url, callback) {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url, true);
@@ -139,6 +160,21 @@
     };
     xhr.send();
 };
+
+var get_readme_data = function(url, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.onload = function() {
+    var status = xhr.status;
+    if (status === 200) {
+      callback(null, xhr.response);
+    } else {
+      callback(status, xhr.response);
+    }
+  };
+  xhr.send();
+};
+
 
 
 var app = new Vue({

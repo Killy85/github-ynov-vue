@@ -10,35 +10,44 @@
         <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="lib/markdown.js"></script>
     </head>
     <body>
         <!-- This block is the feed in which we will diplay info about watched repo-->
         <div id="feed" class="container">
                 <label> Watched Project </label>
-                <select v-model="selected_project">
+                <select class="form-control" v-model="selected_project">
                     <option disabled value="">Choose</option>
                     <option v-for="project in projects" > {{ project }}</option>
                 </select>
                 <label>Watched User</label>
-                <select v-model="selected_user">
+                <select class="form-control" v-model="selected_user">
                     <option disabled value="">Choose</option>
                     <option v-for="user in users" > {{ user }}</option>
                 </select>
 
                 <label> Date from</label>
-                <input type="date" name="date_from" v-model="date_from">
+                <input type="date" name="date_from" v-model="date_from"><br>
 
                 <label> Date to</label>
                 <input type="date" name="date_to" v-model="date_to">
 
+
+                <div class="jumbotron" id="preview"></div>
                 <ul id="example-1" class="list-group">
                     <li v-for="item in repo" class="list-group-item">
-                        {{ item.owner.login }}  {{ item.name}} <br>
+                        <h2><span class="badge badge-primary">{{ item.name}}</span>
+                            <span class="badge badge-secondary">{{ item.owner.login }}</span>  
+                        </h2>
                           <ul id="example-1">  
                             <li v-for="commit in item.commits" class="list-group-item">
-                                  {{ commit.commit.author.name }} {{ commit.commit.message }} {{ commit.sha }}
+                                <h3><span class="badge badge-info"> {{ commit.commit.author.name }} </span></h3>
+                                <p>{{ commit.commit.message }}</p>
+                                <p>{{ commit.commit.author.date}}</p>
+                                <span class="badge badge-secondary"> {{ commit.sha }} </span>
                             </li>
-                            {{ item.readme.download_url}}
+                            <button type="button" class="btn btn-primary" v-on:click="loadMD(item.readme.download_url)">
+                                Voir le MarkDown</button>
                         </ul>
                     </li>
                 </ul>
