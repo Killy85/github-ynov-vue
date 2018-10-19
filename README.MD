@@ -14,7 +14,7 @@ In order to access the API you may want to feed your credentials in the *data/se
 I also added the possibility to see the Readme of the projects from this interface.
 
 
-# Devellopement
+# Developpement
 
 This is, and will stay a class project aiming at discovering the [**Vue.js**](https://vuejs.org/v2/guide/) framework. 
 
