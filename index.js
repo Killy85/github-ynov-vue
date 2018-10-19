@@ -53,23 +53,33 @@
   function getRepos(){
       urls = []
       app.repo = []
-      if(app.selected_project && app.selected_user){
-        urls.push(settings.baseURL + "repos/"+app.selected_user +"/"+ app.selected_project)
-      }else if(app.selected_project) {
-        search.users.forEach(user => {   
-          urls.push(settings.baseURL + "repos/"+user +"/"+ app.selected_project)
-        });
-      }else if( app.selected_user){
-        search.projects.forEach(project => {
-          urls.push(settings.baseURL + "repos/"+app.selected_user +"/"+ project)
-        });
-      }else {
-        search.projects.forEach(project => {
-          search.users.forEach(user => {   
-            urls.push(settings.baseURL + "repos/"+user +"/"+ project)
+      test = app.selected_user ? app.selected_user.length : 0
+      if(test >0) {
+        if(app.selected_project){
+            app.selected_user.forEach(user => {   
+              urls.push(settings.baseURL + "repos/"+user +"/"+ app.selected_project)
+            });
+        }else{
+          search.projects.forEach(project => {
+            app.selected_user.forEach(user => {   
+              urls.push(settings.baseURL + "repos/"+user +"/"+ project)
+            });
           });
-        });
+        }
+      } else {
+        if(app.selected_project){
+            search.users.forEach(user => {   
+              urls.push(settings.baseURL + "repos/"+user +"/"+ app.selected_project)
+            });
+        }else{
+          search.projects.forEach(project => {
+            search.users.forEach(user => {   
+              urls.push(settings.baseURL + "repos/"+user +"/"+ project)
+            });
+          });
+        }
       }
+
       urls_count = urls.length - 1 
       urls.forEach(url => {
         get_repos(url, (status, repository) => {

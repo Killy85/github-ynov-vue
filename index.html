@@ -15,9 +15,7 @@
     </head>
     <body>
             <div class="col-sm-3 col-centered  boxes" id="box1">
-
-
-                  
+                
                     <!-- Modal -->
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   
@@ -66,7 +64,7 @@
                     <option v-for="project in projects" > {{ project }}</option>
                 </select>
                 <label>Watched User</label>
-                <select class="form-control" v-model="selected_user">
+                <select class="form-control" v-model="selected_user" multiple>
                     <option disabled value="">Choose</option>
                     <option v-for="user in users" > {{ user }}</option>
                 </select>
