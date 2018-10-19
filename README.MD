@@ -9,4 +9,8 @@ This project uses Vue.js, this means you may use it by downloading, or cloning t
 
 # NB
 
-This project is under development and may not work atm
+This project is under development and may not work atm.
+
+Settings are loaded from file:
+        data/search.json : contains value for user and projects you want to be able to watch
+        data/settings.json : contains the base url for the github API and the credentials we want to use to connect to the API

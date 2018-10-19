@@ -32,7 +32,7 @@
 
   function getRepos(){
       urls = []
-      repos = []
+      app.repo = []
       if(app.selected_project && app.selected_user){
         urls.push(settings.baseURL + "repos/"+app.selected_user +"/"+ app.selected_project)
       }else if(app.selected_project) {
@@ -60,13 +60,8 @@
                 val = repository
                 val["commits"] = commits_to_rep
                 val["readme"] = readme
-                console.log(val)
-                repos.push(val)
+                app.repo.push(val)              
               }
-              if(urls_count <= urls_fetched){
-                app.repo = repos
-                urls_fetched = 0
-              } 
             })
           }) 
       })
@@ -92,7 +87,30 @@
 
   var get_commits = function(url, callback) {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', url + "/commits", true);
+    params = ""
+    if(app.date_from && app.date_to){
+      date_from = new Date(app.date_from)
+      date_to = new Date(app.date_to)
+      date_now = new Date()
+      if(date_from <= date_to <= date_now){
+        params = "?since="+date_from.toString()+"&until=" + date_to.toString()
+      }
+
+    }else if(app.date_from){
+      date_from = new Date(app.date_from)
+      date_now = new Date()
+      if(date_from <= date_now){
+        params = "?since="+date_from.toString()
+      }
+    }else if(app.date_to){
+      date_to = new Date(app.date_to)
+      date_now = new Date()
+      if(date_to <= date_now){
+        params = "?until=" + date_to.toString()
+      }
+    }
+
+    xhr.open('GET', url + "/commits" +params, true);
     xhr.responseType = 'json';
     xhr.setRequestHeader("Authorization", "Basic " + btoa(settings.credentials.login+":"+settings.credentials.password))
     xhr.onload = function() {
